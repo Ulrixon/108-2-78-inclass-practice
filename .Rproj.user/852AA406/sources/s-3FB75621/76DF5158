@@ -3,7 +3,7 @@
     "path": "C:/Users/NTPU/Desktop/test/108-2-78-inclass-practice/第三堂課test.Rmd",
     "project_path": "第三堂課test.Rmd",
     "type": "r_markdown",
-    "hash": "724151689",
+    "hash": "1182960333",
     "contents": "",
     "dirty": false,
     "created": 1584517496388.0,
@@ -11,16 +11,16 @@
     "relative_order": 2,
     "properties": {
         "tempName": "Untitled1",
-        "cursorPosition": "40,0",
-        "scrollLine": "21",
+        "cursorPosition": "101,0",
+        "scrollLine": "74",
         "last_setup_crc32": "3FB75621bb338d19"
     },
     "folds": "",
-    "lastKnownWriteTime": 1584518805,
+    "lastKnownWriteTime": 1584521970,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1584518805424,
+    "last_content_update": 1584521970195,
     "read_only": false,
     "read_only_alternatives": []
 }
