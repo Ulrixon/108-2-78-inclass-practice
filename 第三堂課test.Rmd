@@ -34,4 +34,16 @@ hypothesisData <- read_csv("https://www.dropbox.com/s/0etoflih5eqc0bc/hypothesis
 View(hypothesisData)
 
 ```
+```{r}
+a <- 2
+a = 2 
+```
+
+```{r}
+3 -> b
+```
+```{r}
+a+b
+```
+
 
