@@ -1,0 +1,32 @@
+{
+    "id": "5FD4337B",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1584517917503.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "expression": "hypothesisData",
+        "caption": "hypothesisData",
+        "totalObservations": 19,
+        "displayedObservations": 19,
+        "variables": 1,
+        "cacheKey": "C103195C",
+        "object": "hypothesisData",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=hypothesisData&cache_key=C103195C&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": 7957704863871034658,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1584517917503,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,32 @@
+{
+    "id": "A7AF89DB",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1584517737306.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "expression": "exDataPost80s",
+        "caption": "exDataPost80s",
+        "totalObservations": 2325,
+        "displayedObservations": 2325,
+        "variables": 6,
+        "cacheKey": "33AB8882",
+        "object": "exDataPost80s",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=exDataPost80s&cache_key=33AB8882&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": 8030597042934194720,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1584517737306,
+    "read_only": false,
+    "read_only_alternatives": []
+}

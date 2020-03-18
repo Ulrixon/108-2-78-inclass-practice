@@ -17,12 +17,21 @@ When you click the **Knit** button a document will be generated that includes bo
 summary(cars)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+library(googlesheets4)
+library(lubridate)
+library(dplyr)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+library(readr)
+exDataPost80s <- read_csv("https://www.dropbox.com/s/rc6t40gsxduysz6/exDataPost80s.csv?dl=1")
+View(exDataPost80s)
+```
+```{r}
+library(readr)
+hypothesisData <- read_csv("https://www.dropbox.com/s/0etoflih5eqc0bc/hypothesisData.csv?dl=1")
+View(hypothesisData)
+
+```
+
