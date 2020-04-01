@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1585734050836.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2392129235",
+    "id" : "3C0DA566",
+    "lastKnownWriteTime" : 1585731924,
+    "last_content_update" : 1585734058054,
+    "path" : "C:/Users/ryan/Desktop/Ryan/Rstudio/108-2-78-inclass-practice/第四堂課test.Rmd",
+    "project_path" : "第四堂課test.Rmd",
+    "properties" : {
+        "cursorPosition" : "40,36",
+        "last_setup_crc32" : "9B7D6503bb338d19",
+        "scrollLine" : "19"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
