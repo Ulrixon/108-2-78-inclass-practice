@@ -1,0 +1,6 @@
+"0","Prisoners_dillemma=list("
+"0","  `Aplayer_stay_silent`=list(`Bplayer_stay_silent`=list(Aconsequence=c(-1),Bconsequence=c(-1)),"
+"0","                           `Bplayer_betrays`=list(Aconsequence=-3,Bconsequence=0)),"
+"0","  `Aplayer_betrays`=list(`Bplayer_stay_silent`=list(Aconsequence=0,Bconsequence=-3),"
+"0","                        `Bplayer_betrays`=list(Aconsequence=-2,Bconsequence=-2))"
+"0",")"
