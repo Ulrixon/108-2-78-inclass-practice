@@ -92,4 +92,17 @@ Prisoners_dillemma=list(
   `Aplayer_betrays`=list(`Bplayer_stay_silent`=list(Aconsequence=0,Bconsequence=-3),
                         `Bplayer_betrays`=list(Aconsequence=-2,Bconsequence=-2))
 )
+print(Prisoners_dillemma)
 ```
+```{r}
+Prisoners_dillemma=list(
+  players_of_the_game=list(name1="A",name2="B"),
+  each_players_strategy=list(A_strategy=list(option1="stay_silent",option2="betray"),B_strategy=list(option1="stay_silent",option2="betray")),
+  eventual_outcome=list(`Aplayer_stay_silent`=list(`Bplayer_stay_silent`=list(Aconsequence=c(-1),Bconsequence=c(-1)),
+                           `Bplayer_betrays`=list(Aconsequence=-3,Bconsequence=0)),
+  `Aplayer_betrays`=list(`Bplayer_stay_silent`=list(Aconsequence=0,Bconsequence=-3),
+                        `Bplayer_betrays`=list(Aconsequence=-2,Bconsequence=-2)))
+)
+print(Prisoners_dillemma)
+```
+
