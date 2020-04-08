@@ -26,3 +26,37 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+library(jsonlite)
+fromJSON("https://data.tainan.gov.tw/dataset/4cd9345a-04bf-4328-a97d-314ff78b4763/resource/afc025fc-1ef4-447c-b785-a680391d0ca1/download/tnsport2.json", simplifyDataFrame = F) -> tainanSportsMap
+```
+```{r}
+str(tainanSportsMap)
+```
+```{r}
+str(tainanSportsMap[c(250,3,4,5)])
+```
+
+
+```{r}
+tainan1=tainanSportsMap[[1]]
+```
+
+
+```{r}
+fromJSON("http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000157-002",
+         simplifyDataFrame = F) -> newTaipeiCityVaccine
+```
+
+```{r}
+str(newTaipeiCityVaccine[["result"]],max.level = 2)
+
+```
+
+```{r}
+fromJSON("https://www.dropbox.com/s/qnm9bnz7vccrvcz/taipeiNightMarkets.json?dl=1", simplifyDataFrame = F) -> taipeiNightMarkets
+```
+```{r}
+str(taipeiNightMarkets[c(1,2,3)])
+```
+
