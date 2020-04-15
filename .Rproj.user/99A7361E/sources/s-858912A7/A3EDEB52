@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586954704467.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "A3EDEB52",
+    "lastKnownWriteTime" : 1586954724,
+    "last_content_update" : 1586954734084,
+    "path" : "C:/Users/ryan/Desktop/Ryan/Rstudio/108-2-78-inclass-practice/第七堂課.Rmd",
+    "project_path" : "第七堂課.Rmd",
+    "properties" : {
+        "cursorPosition" : "10,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
