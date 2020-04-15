@@ -126,8 +126,25 @@ list1 <-
       bloodType="AB"
     )
   )
+
+
+str(list1)
+```
+
+```{r}
 list1[[1]]=list1[[1]][-c(3)]
 list1[[2]]=list1[[2]][-c(3,5)]
+```
+
+```{r}
 str(list1)
+list1[[2]][c(1,2)] <- NULL
+str(list1)
+```
+```{r}
+library(jsonlite)
+fromJSON("https://data.ntpc.gov.tw/od/data/api/54DDDC93-589C-4858-9C95-18B2046CC1FC?$format=json", simplifyDataFrame = F) -> newTaipeiYouBike
+newTaipeiYouBike[[1]][[1]]=NULL
+str(newTaipeiYouBike[[1]])
 ```
 
