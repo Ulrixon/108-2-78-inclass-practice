@@ -1,0 +1,2 @@
+"0","knitr::opts_chunk$set(echo = TRUE)"
+"0","is_html <- knitr::opts_knit$get(""rmarkdown.pandoc.to"") == ""html"""
