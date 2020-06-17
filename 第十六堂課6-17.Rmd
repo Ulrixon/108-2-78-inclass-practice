@@ -7,6 +7,436 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(stringr)
+library(lubridate)
+library(purrr)
 ```
 
+```{r}
+n<- 540
+
+conditionExpression_outcome=
+  ifelse(n %% 2==0, "even", "odd") 
+
+switch(
+  conditionExpression_outcome,
+  "even"={fvalue <- n/2}, # 偶數
+  "odd"=fvalue <- -(n+1)/2, # 奇數；只有一行指令可省略{}
+  warning("n要整數喔")  
+)
+
+print(fvalue)
+```
+
+```{r}
+result <- 
+  {
+    x <- 2
+    y <- 3
+    x**y+15
+  }
+print(result)
+```
+
+```{r}
+a <- c(1,2,3)
+b=cut(a, c(1,2,3))
+```
+
+```{r}
+grade <- sample(1:100, 10, replace=T)
+
+grade %>%
+  cut(c(-1,69,79,89,100)) -> grade
+
+levels(grade)
+
+switch(
+  as.character(grade[[1]]),
+  "(-1,69]"={
+    print("-_-")
+    "F"},
+  "(69,79]"={
+    print("棒")
+    "C"
+    },
+  "(79,89]"={
+    print("好棒")
+    "B"
+    },
+  "(89,100]"={
+    print("好棒棒")
+    "A"
+    }
+) -> letterGrade # 有回存時要螢幕印出的訊息一定要加print
+```
+
+```{r}
+compute_letterGrade=function(myGrade){
+  condition=cut(myGrade,c(-1,69,79,89,100))
+  switch (as.character(condition),
+    "(-1,69]"={
+    print("-_-")
+    "F"},
+  "(69,79]"={
+    print("棒")
+    "C"
+    },
+  "(79,89]"={
+    print("好棒")
+    "B"
+    },
+  "(89,100]"={
+    print("好棒棒")
+    "A"
+  },
+  {
+    print("incorrect grade number inputed")
+    "W"
+  }
+    
+  )-> letterGrade
+  return(letterGrade)
+}
+```
+
+```{r}
+compute_letterGrade(80)
+```
+
+```{r}
+nowtime <- glue::glue("{today()} 18:00:00") %>% ymd_hms(tz="Asia/Taipei")
+
+library(lubridate)
+library(glue)
+
+# 建立可當cutpoints的一天時間點
+cutpoints <-
+  c(
+    glue("{today()} 06:00:00"),
+    glue("{today()} 09:00:00"),
+    glue("{today()} 17:00:00"),
+    glue("{today()} 19:00:00"),
+    glue("{today()} 23:30:00"),
+    glue("{today()+days(1)} 01:00:00")
+  )
+cutpoints %>%
+  ymd_hms(tz="Asia/Taipei") -> cutpoints
+
+## 將nowtime轉成它對應的時段是"morning", "evening", 或其他。
+cut(nowtime, cutpoints) -> nowtime
+levels(nowtime)[c(1,3,5)] <-
+  c("morning","evening","jazz time")
+
+## 使用switch決定要做什麼事
+switch(
+  as.character(nowtime),
+  "morning"={
+    print("要不要來閱讀點國際時事？")
+    browseURL("https://economist.com")
+  },
+  "evening"={
+    print("需不需要點餐呢？")
+    browseURL("https://www.foodpanda.com.tw/")
+  },
+  "jazz time"={
+    print("放鬆聽點Jazz。")
+    browseURL("https://open.spotify.com/playlist/37i9dQZF1DXbITWG1ZJKYt")
+  },
+  {
+    print("機器人要休息，饒了我吧～～")
+  }
+)
+```
+```{r}
+nowtime
+```
+
+```{r}
+whatNeedToDo_butler_mom <- function(nowtime=now()){
+  library(lubridate)
+  library(glue)
+
+  cutpoints <-
+    c(
+      glue("{today()} 06:00:00"),
+      glue("{today()} 09:00:00"),
+      glue("{today()} 17:00:00"),
+      glue("{today()} 19:00:00"),
+      glue("{today()} 23:30:00"),
+      glue("{today()+days(1)} 01:00:00")
+    )
+  cutpoints %>%
+    ymd_hms(tz="Asia/Taipei") -> cutpoints
+  
+  cut(nowtime, cutpoints) -> nowtime
+  levels(nowtime)[c(1,3,5)] <-
+    c("morning","evening","jazz time")
+  
+  switch(
+    as.character(nowtime),
+    "morning"={
+      print("要不要來閱讀點國際時事？")
+      browseURL("https://economist.com")
+    },
+    "evening"={
+      print("需不需要點餐呢？")
+      browseURL("https://www.foodpanda.com.tw/")
+    },
+    "jazz time"={
+      print("放鬆聽點Jazz。")
+      browseURL("https://open.spotify.com/playlist/37i9dQZF1DXbITWG1ZJKYt")
+    },
+    {
+      print("機器人要休息，饒了我吧～～")
+    }
+  )
+}
+
+ymd_hms(glue::glue("{today()} 08:00:00"),tz="Asia/Taipei") %>%
+  whatNeedToDo_butler_mom()
+
+ymd_hms(glue::glue("{today()} 14:00:00"),tz="Asia/Taipei") %>%
+  whatNeedToDo_butler_mom()
+
+ymd_hms(glue::glue("{today()} 18:00:00"),tz="Asia/Taipei") %>%
+  whatNeedToDo_butler_mom()
+
+ymd_hms(glue::glue("{today()+days(1)} 00:20:00"),tz="Asia/Taipei") %>%
+  whatNeedToDo_butler_mom()
+```
+
+```{r}
+whatNeedToDo_butler_mom <- function(nowtime=now()){
+  library(lubridate)
+  library(glue)
+
+  cutpoints <-
+    c(
+      glue("{today()} 06:00:00"),
+      glue("{today()} 09:00:00"),
+      glue("{today()} 17:00:00"),
+      glue("{today()} 19:00:00"),
+      glue("{today()} 23:30:00"),
+      glue("{today()+days(1)} 01:00:00")
+    )
+  cutpoints %>%
+    ymd_hms(tz="Asia/Taipei") -> cutpoints
+  
+  cut(nowtime, cutpoints) -> nowtime
+  levels(nowtime)[c(1,3,5)] <-
+    c("morning","evening","jazz time")
+  nowtime=as.character(nowtime)
+  if(nowtime=="morning"){
+      print("要不要來閱讀點國際時事？")
+      browseURL("https://economist.com")
+    }else if(nowtime=="evening"){
+      print("需不需要點餐呢？")
+      browseURL("https://www.foodpanda.com.tw/")
+    }else if(nowtime=="jazz time"){
+      print("放鬆聽點Jazz。")
+      browseURL("https://open.spotify.com/playlist/37i9dQZF1DXbITWG1ZJKYt")
+    }else{
+      print("機器人要休息，饒了我吧～～")
+    }
+  
+  
+}
+```
+```{r}
+whatNeedToDo_butler_mom <- function(nowtime=now()){
+  library(lubridate)
+  library(glue)
+  library(magrittr)
+
+  cutpoints <-
+    c(
+      glue("{today()} 06:00:00"),
+      glue("{today()} 09:00:00"),
+      glue("{today()} 17:00:00"),
+      glue("{today()} 19:00:00"),
+      glue("{today()} 23:30:00"),
+      glue("{today()+days(1)} 01:00:00")
+    )
+  cutpoints %>%
+    ymd_hms(tz="Asia/Taipei") -> cutpoints
+  
+  
+  
+  switch(
+    nowtime=dplyr::case_when(
+  
+  cutpoints[[1]]<=nowtime && nowtime <= cutpoints[[2]] ~"morning",
+  cutpoints[[3]]<=nowtime && nowtime <= cutpoints[[4]] ~"evening",
+  cutpoints[[5]]<=nowtime && nowtime<= cutpoints[[6]] ~"jazz time"
+  
+),
+    "morning"={
+      print("要不要來閱讀點國際時事？")
+      browseURL("https://economist.com")
+    },
+    "evening"={
+      print("需不需要點餐呢？")
+      browseURL("https://www.foodpanda.com.tw/")
+    },
+    "jazz time"={
+      print("放鬆聽點Jazz。")
+      browseURL("https://open.spotify.com/playlist/37i9dQZF1DXbITWG1ZJKYt")
+    },
+    {
+      print("機器人要休息，饒了我吧～～")
+    }
+  )
+  
+  
+}
+```
+```{r}
+y <- sample(40:100,20, replace=T)
+dplyr::case_when(
+  y < 60 ~ "F",
+  60<=y & y < 70 ~"D",
+  71<=y & y < 80 ~"C",
+  80<=y & y < 90 ~"B",
+  90<=y ~ "A"
+)
+```
+```{r}
+ymd_hms(glue::glue("{today()} 08:00:00"),tz="Asia/Taipei") %>%
+  whatNeedToDo_butler_mom()
+
+ymd_hms(glue::glue("{today()} 14:00:00"),tz="Asia/Taipei") %>%
+  whatNeedToDo_butler_mom()
+
+ymd_hms(glue::glue("{today()} 18:00:00"),tz="Asia/Taipei") %>%
+  whatNeedToDo_butler_mom()
+
+ymd_hms(glue::glue("{today()+days(1)} 00:20:00"),tz="Asia/Taipei") %>%
+  whatNeedToDo_butler_mom()
+```
+
+```{r}
+
+whatNeedToDo_butler_dad <- function(nowtime=now()){
+  library(lubridate)
+  library(glue)
+
+  cutpoints <-
+    c(
+      glue("{today()} 06:00:00"),
+      glue("{today()} 09:00:00"),
+      glue("{today()} 17:00:00"),
+      glue("{today()} 19:00:00"),
+      glue("{today()} 23:30:00"),
+      glue("{today()+days(1)} 01:00:00")
+    )
+  cutpoints %>%
+    ymd_hms(tz="Asia/Taipei") -> cutpoints
+  
+  cut(nowtime, cutpoints) -> nowtime
+  levels(nowtime)[c(1,3,5)] <-
+    c("morning","evening","jazz time")
+  nowtime=as.character(nowtime)
+  if(nowtime=="morning"){
+      print("要不要來閱讀點國際時事？")
+      browseURL("https://www.wsj.com/")
+    }else if(nowtime=="evening"){
+      print("需不需要規劃週末全家旅行呢？")
+      browseURL("https://www.tripadvisor.com/")
+    }else if(nowtime=="jazz time"){
+      print("機器人要休息，饒了我吧～～")
+      
+    }else{
+      print("機器人要休息，饒了我吧～～")
+    }
+  
+  
+}
+```
+
+```{r}
+ymd_hms(glue::glue("{today()} 08:00:00"),tz="Asia/Taipei") %>%
+  whatNeedToDo_butler_dad()
+
+ymd_hms(glue::glue("{today()} 14:00:00"),tz="Asia/Taipei") %>%
+  whatNeedToDo_butler_dad()
+
+ymd_hms(glue::glue("{today()} 18:00:00"),tz="Asia/Taipei") %>%
+  whatNeedToDo_butler_dad()
+
+ymd_hms(glue::glue("{today()+days(1)} 00:20:00"),tz="Asia/Taipei") %>%
+  whatNeedToDo_butler_dad()
+```
+```{r}
+
+whatNeedToDo_butler_ming <- function(nowtime=now()){
+  library(lubridate)
+  library(glue)
+
+  cutpoints <-
+    c(
+      glue("{today()} 06:00:00"),
+      glue("{today()} 09:00:00"),
+      glue("{today()} 17:00:00"),
+      glue("{today()} 19:00:00"),
+      glue("{today()} 23:30:00"),
+      glue("{today()+days(1)} 01:00:00")
+    )
+  cutpoints %>%
+    ymd_hms(tz="Asia/Taipei") -> cutpoints
+  
+  cut(nowtime, cutpoints) -> nowtime
+  levels(nowtime)[c(1,3,5)] <-
+    c("morning","evening","jazz time")
+  nowtime=as.character(nowtime)
+  if(nowtime=="morning"){
+      print("檢查書包東西都有帶嗎？")
+      
+    }else if(nowtime=="evening"){
+      print("作業寫好了嗎？")
+      
+    }else if(nowtime=="jazz time"){
+      print("機器人要休息，饒了我吧～～")
+      
+    }else{
+      print("機器人要休息，饒了我吧～～")
+    }
+  
+  
+}
+```
+```{r}
+myAnswer <- c(2,3,6)
+correctAnswer <- c(2,3,5)
+
+if(all(myAnswer == correctAnswer)){ # 要全TRUE
+  print("你答對了")
+}
+```
+
+```{r}
+grading=function(myAnswer, correctAnswer){
+  a=0
+  if(all(myAnswer == correctAnswer)&&class(myAnswer)==class(correctAnswer)){ # 要全TRUE
+  a=10
+  }
+  return(a)
+}
+```
+
+```{r}
+
+grading(c(1,2,3),factor(c(1,2,3)))
+
+```
+
+```{r}
+Ufun=function(a1, a2, m, alpha=0.5){
+  a=(a1**alpha)*(a2**(1-alpha))-m
+  return(a)
+}
+```
+```{r}
+Ufun(2,3,1)
+```
 
