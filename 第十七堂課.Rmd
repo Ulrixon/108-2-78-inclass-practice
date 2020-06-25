@@ -7,6 +7,107 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(purrr)
 ```
 
+```{r}
+grade <- c(45, 74, NA)
+
+i <- 3
+
+grade_i <- grade[[i]]
+if (!is.na(grade_i)) {
+    if (grade_i >= 60) {
+        "P"
+```
+
+
+```{r}
+} else if (grade_i < 60) {
+        "F"
+    }
+```
+
+
+```{r}
+} else {
+    "缺考"
+}
+```
+
+```{r}
+pass_or_fail <- function(grade_i) {
+    if (!is.na(grade_i)) {
+        if (grade_i >= 60) {
+            "P"
+        } else if (grade_i < 60) {
+            "F"
+        }
+    } else {
+        "缺考"
+    }
+}
+
+```
+
+```{r}
+map(grade, ~
+    pass_or_fail(.x)
+)
+```
+
+```{r}
+list(
+  list("student A", c(2,3,4,5)),
+  list("student B", NA), # 沒交作業
+  list("student C", factor(c(2,3,4,5))),
+  list("student D", factor(c(2,3,5)))
+) -> collectionHWs
+
+correctAns <- factor(c(2,3,4,5))
+
+output <- vector("integer",length(collectionHWs))
+nameVector <- vector("character", length(collectionHWs))
+for(.x in seq_along(collectionHWs)){
+  nameVector[[.x]] <- collectionHWs[[.x]][[1]]
+  studentAns <- collectionHWs[[.x]][[2]] 
+  if(is.na(studentAns)){
+    output[[.x]] <- 0
+    next
+  } 
+  
+  # 改題部份
+  if(identical(studentAns, correctAns)){
+    output[[.x]] <- 10
+  } else if (class(studentAns)!=class(correctAns) && identical(as.character(studentAns),as.character(correctAns))) {
+    output[[.x]] <- 5
+  } else {
+    output[[.x]] <- 0
+  }
+}
+names(output) <- nameVector
+
+print(output)
+```
+
+```{r}
+list(
+  list("student A", c(2,3,4,5)),
+  list("student B", NA), # 沒交作業
+  list("student C", factor(c(2,3,4,5))),
+  list("student D", factor(c(2,3,5)))
+) -> collectionHWs
+correctAns <- factor(c(2,3,4,5))
+compute_grades=function(studentAns, correctAns){
+  output=0
+  if(identical(studentAns, correctAns)){
+    output <- 10
+  } else if (class(studentAns)!=class(correctAns) && identical(as.character(studentAns),as.character(correctAns))) {
+    output <- 5
+  } else {
+    output <- 0
+  }
+}
+output=map(1:4,~{compute_grades(collectionHWs[[.x]][[2]],correctAns)})
+```
 
